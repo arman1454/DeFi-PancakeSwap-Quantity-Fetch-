@@ -12,5 +12,7 @@ const pairABI = [
 
 //through this will do all the price fetching things
 const routerABI = [
-
+    "function getAmountsOut(uint amountIn, address[] memory path) public view returns (uint[] memory amounts)"
 ]
+
+module.exports = { erc20ABI, factoryABI, pairABI, routerABI };
