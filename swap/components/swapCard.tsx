@@ -20,18 +20,17 @@ const SwapCard = ()=> {
           <div className="grid w-full items-center gap-9">
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="name">BUSD</Label>
-              <Input id="name" placeholder="Sell" />
+              <Input id="name" type = "number" placeholder="Sell" />
             </div>
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="name">WBNB</Label>
-              <Input id="name" placeholder="Buy" />
+              <Input id="name" type = "number" placeholder="Buy" />
             </div>
           </div>
         </form>
       </CardContent>
       <CardFooter className="flex justify-between">
-        <Button variant="outline">Cancel</Button>
-        <Button>Deploy</Button>
+        <Button variant="outline">Connect Wallet</Button>
       </CardFooter>
     </Card>
   )
