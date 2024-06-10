@@ -35,7 +35,7 @@ const SwapCard = () => {
     try {
 
       const data = {
-        amount: sellAmount
+        amnt: sellAmount
       }
 
       const result = await axios.post("/api/fetchPrice", data)
