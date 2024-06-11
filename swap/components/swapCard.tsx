@@ -34,19 +34,19 @@ const SwapCard = () => {
 
     try {
 
-      const data = {
+      const values = {
         amnt: sellAmount
       }
 
-      const result = await axios.post("/api/fetchPrice", data)
+      const {data} = await axios.post("/api/fetchPrice", values)
 
-      console.log(result);
+      console.log(data);
 
-      // if (data.success && data.buyAmount) {
-      //   setBuyAmount(data.buyAmount);
-      // } else {
-      //   setApiError(data.error || "API error occurred"); // Handle API errors with more informative messages
-      // }
+      if (data) {
+        setBuyAmount(data.message);
+      } else {
+        setApiError(data.error || "API error occurred"); // Handle API errors with more informative messages
+      }
     } catch (error) {
       console.error("API error:", error);
     } finally {
@@ -55,11 +55,11 @@ const SwapCard = () => {
 
   }
 
-  useEffect(() => {
-    if (sellAmount) {
-      handleApiCall(); // Trigger API call when sellAmount changes
-    }
-  }, [sellAmount]);
+  // useEffect(() => {
+  //   if (sellAmount) {
+  //     handleApiCall(); // Trigger API call when sellAmount changes
+  //   }
+  // }, [sellAmount]);
 
   return (
     <Card className="w-[350px]">
@@ -87,13 +87,13 @@ const SwapCard = () => {
                 name="buyAmount"
                 value={buyAmount} // Display fetched WBNB value
                 onChange={handleInputChange} // Allow manual edit
-                disabled={!!sellAmount} />
+                disabled={!sellAmount} />
             </div>
           </div>
         </form>
       </CardContent>
       <CardFooter className="flex justify-between">
-        <Button variant="outline">Connect Wallet</Button>
+        <Button variant="outline" onClick={()=>handleApiCall()}>Get Price</Button>
       </CardFooter>
     </Card>
   )
