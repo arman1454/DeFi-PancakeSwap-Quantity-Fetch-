@@ -6,7 +6,7 @@ import SwapCard from "@/components/swapCard";
 export default function Home() {
   return (
     <>
-    <div className="flex items-center justify-center">
+    <div className="flex items-center justify-center mt-4">
       <DarkMode/>
     </div>
     <div className="flex items-center justify-center h-screen">

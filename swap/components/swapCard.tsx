@@ -8,6 +8,7 @@ import { Button } from "./ui/button"
 import { useState, useEffect } from "react";
 import axios from "axios"
 import { MdOutlineSwapVert } from "react-icons/md";
+// import {CircularProgress} from "@nextui-org/progress";
 
 const SwapCard = () => {
   const [sellAmount, setSellAmount] = useState("");
@@ -78,7 +79,7 @@ const SwapCard = () => {
   // }, [sellAmount]);
 
   return (
-    <Card className="w-[350px]">
+    <Card className="w-[350px] mb-16">
       <CardHeader>
         <CardTitle>Swap</CardTitle>
         <CardDescription>Trade Tokens in an Instant</CardDescription>
@@ -96,7 +97,7 @@ const SwapCard = () => {
                 onChange={handleInputChange} />
             </div>
             <div className="flex items-center pl-7">
-              <Button className="w-50 rounded-full" variant="secondary" onClick={() => handleSwap()}>
+              <Button className="w-50 rounded-full border-2" variant="secondary" onClick={() => handleSwap()}>
               <MdOutlineSwapVert />
               </Button>
             </div>
@@ -119,7 +120,7 @@ const SwapCard = () => {
 
       <CardFooter className="flex justify-between">
 
-        <Button variant="outline" onClick={() => handleApiCall()}>Get Price</Button>
+        <Button variant="default" onClick={() => handleApiCall()}>Get Price</Button>
       </CardFooter>
     </Card>
   )
