@@ -1,6 +1,4 @@
 "use client"
-
-import * as React from "react"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card"
 
 import { Input } from "./ui/input"
@@ -9,12 +7,15 @@ import { Button } from "./ui/button"
 
 import { useState, useEffect } from "react";
 import axios from "axios"
+import { MdOutlineSwapVert } from "react-icons/md";
 
 const SwapCard = () => {
   const [sellAmount, setSellAmount] = useState("");
   const [buyAmount, setBuyAmount] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [apiError, setApiError] = useState(null);
+  const [top, setTop] = useState("BUSD");
+  const [bottom, setBottom] = useState("WBNB");
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -24,6 +25,21 @@ const SwapCard = () => {
       setBuyAmount(value); // Update buyAmount if user manually edits it
     }
   };
+
+  const handleSwap = async () => {
+    if (top === "BUSD") {
+      setBottom("BUSD")
+      setTop("WBNB")
+    }
+    else {
+      setBottom("WBNB")
+      setTop("BUSD")
+    }
+
+
+
+  }
+
 
   const handleApiCall = async () => {
     if (!sellAmount) {
@@ -38,7 +54,7 @@ const SwapCard = () => {
         amnt: sellAmount
       }
 
-      const {data} = await axios.post("/api/fetchPrice", values)
+      const { data } = await axios.post("/api/fetchPrice", values)
 
       console.log(data);
 
@@ -57,7 +73,7 @@ const SwapCard = () => {
 
   // useEffect(() => {
   //   if (sellAmount) {
-  //     handleApiCall(); // Trigger API call when sellAmount changes
+  //     handleApiCall(); // Trigger API call when sellAmount changes 
   //   }
   // }, [sellAmount]);
 
@@ -68,32 +84,42 @@ const SwapCard = () => {
         <CardDescription>Trade Tokens in an Instant</CardDescription>
       </CardHeader>
       <CardContent>
-        <form>
+        <form onSubmit={(e) => e.preventDefault()}>
           <div className="grid w-full items-center gap-9">
             <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="name">BUSD</Label>
+              <Label htmlFor="name">{top}</Label>
               <Input id="sellAmount"
                 type="number"
-                placeholder="Sell"
+                placeholder={"sell " + top}
                 name="sellAmount"
                 value={sellAmount}
                 onChange={handleInputChange} />
             </div>
+            <div className="flex items-center pl-7">
+              <Button className="w-50 rounded-full" variant="secondary" onClick={() => handleSwap()}>
+              <MdOutlineSwapVert />
+              </Button>
+            </div>
             <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="name">WBNB</Label>
+              <Label htmlFor="name">{bottom}</Label>
               <Input id="buyAmount"
                 type="number"
-                placeholder="Buy"
+                placeholder={"buy " + bottom}
                 name="buyAmount"
                 value={buyAmount} // Display fetched WBNB value
                 onChange={handleInputChange} // Allow manual edit
-                disabled={!sellAmount} />
+                disabled={!buyAmount} />
             </div>
+
+
           </div>
+
         </form>
       </CardContent>
+
       <CardFooter className="flex justify-between">
-        <Button variant="outline" onClick={()=>handleApiCall()}>Get Price</Button>
+
+        <Button variant="outline" onClick={() => handleApiCall()}>Get Price</Button>
       </CardFooter>
     </Card>
   )
