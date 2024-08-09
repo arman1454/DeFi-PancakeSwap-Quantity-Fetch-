@@ -5,10 +5,9 @@ import { Input } from "./ui/input"
 import { Label } from "./ui/label"
 import { Button } from "./ui/button"
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios"
 import { MdOutlineSwapVert } from "react-icons/md";
-// import {CircularProgress} from "@nextui-org/progress";
 
 const SwapCard = () => {
   const [sellAmount, setSellAmount] = useState("");
@@ -109,7 +108,7 @@ const SwapCard = () => {
                 name="buyAmount"
                 value={buyAmount} // Display fetched WBNB value
                 onChange={handleInputChange} // Allow manual edit
-                disabled={!buyAmount} />
+                disabled={!buyAmount}/>
             </div>
 
 
